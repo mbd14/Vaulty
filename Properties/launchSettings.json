@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Vaulty": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
