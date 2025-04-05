@@ -10,7 +10,10 @@ services:
       MSSQL_SA_PASSWORD: "password1*"
     ports:
       - "1433:1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
     restart: unless-stopped
+
 
   vaulty:
     build:
@@ -19,7 +22,11 @@ services:
     depends_on:
       - sqlserver
     environment:
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=VAULTY_DB;User Id=vaulty_user;Password=password1*;"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=master;User Id=sa;Password=password1*;TrustServerCertificate=True;"
     ports:
       - "5000:80" # Adjust depending on your app
     restart: unless-stopped
+
+volumes:
+  sqlvolume:
+    driver: local
