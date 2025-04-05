@@ -11,7 +11,7 @@
             MainAsync().GetAwaiter().GetResult();
         }
 
-        // Main method for async execution of the bot
+        // Main method for async execution of the bot   
         static async Task MainAsync()
         {
             // Start the App and wait forever in the main thread

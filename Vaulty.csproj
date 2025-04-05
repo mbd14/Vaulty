@@ -27,6 +27,12 @@
     <PackageReference Include="DisCatSharp.Common" Version="10.7.0-nightly-006" />
     <PackageReference Include="DisCatSharp.Hosting" Version="10.7.0-nightly-006" />
     <PackageReference Include="DisCatSharp.Interactivity" Version="10.7.0-nightly-006" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 

@@ -1,9 +1,12 @@
-﻿using DisCatSharp;
+﻿using System.Reflection;
+using DisCatSharp;
 using DisCatSharp.ApplicationCommands;
+using DisCatSharp.Entities;
 using DisCatSharp.Enums;
 using Microsoft.Extensions.Logging;
 using Vaulty.Modules;
 using Vaulty.Utils;
+using static Vaulty.Modules.UserModule;
 
 namespace Vaulty.App
 {
@@ -41,7 +44,8 @@ namespace Vaulty.App
         /// </summary>
         public void RegisterSlashCommands()
         {
-            _client.UseApplicationCommands().RegisterGlobalCommands<Info>();
+            _client.UseApplicationCommands().RegisterGlobalCommands(Assembly.GetAssembly(typeof(UserModule)));
+
         }
     }
 }
