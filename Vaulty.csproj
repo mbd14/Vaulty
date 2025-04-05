@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="sensitive.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sensitive.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DisCatSharp" Version="10.7.0-nightly-006" />
+    <PackageReference Include="DisCatSharp.ApplicationCommands" Version="10.7.0-nightly-006" />
+    <PackageReference Include="DisCatSharp.Attributes" Version="2025.3.27" />
+    <PackageReference Include="DisCatSharp.CommandsNext" Version="10.7.0-nightly-006" />
+    <PackageReference Include="DisCatSharp.Common" Version="10.7.0-nightly-006" />
+    <PackageReference Include="DisCatSharp.Hosting" Version="10.7.0-nightly-006" />
+    <PackageReference Include="DisCatSharp.Interactivity" Version="10.7.0-nightly-006" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+  </ItemGroup>
+
+</Project>
