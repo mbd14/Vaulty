@@ -1,4 +1,6 @@
-﻿namespace Vaulty
+﻿using DSharpPlus;
+
+namespace Vaulty
 {
     internal class Program
     {

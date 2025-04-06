@@ -11,5 +11,10 @@ namespace Vaulty.Utils
     {
         public static readonly string TOKEN_FILE = "sensitive.json";
         public static readonly string INFO_FILE = "info.json";
+
+
+
+        public static readonly int USER_ADD_DEFAULT_COINS = 1000;
+        public static readonly int USER_ADD_DEFAULT_VAULTIUM = 5;
     }
 }
