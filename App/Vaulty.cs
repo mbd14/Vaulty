@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using DisCatSharp;
-using DisCatSharp.ApplicationCommands;
-using DisCatSharp.Entities;
-using DisCatSharp.Enums;
+using DSharpPlus;
+using DSharpPlus.Commands;
+using DSharpPlus.Commands.Processors.TextCommands;
+using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using Microsoft.Extensions.Logging;
 using Vaulty.Modules;
 using Vaulty.Utils;
@@ -12,21 +12,44 @@ namespace Vaulty.App
 {
     public class Vaulty
     {
-        public DiscordClient _client;
+        public DiscordClientBuilder _builder;
+
+        public static DiscordClient _client;
 
         /// <summary>
         /// Configurate the Discord Client
         /// </summary>
         public Vaulty()
         {
-            _client = new DiscordClient(new DiscordConfiguration()
+            _builder = DiscordClientBuilder.CreateDefault(JsonSensitiveLoader.TokenLoad(), DiscordIntents.AllUnprivileged | DiscordIntents.MessageContents);
+            _builder.SetLogLevel(LogLevel.Trace);
+            // Setup the commands extension
+            _builder.UseCommands((IServiceProvider serviceProvider, CommandsExtension extension) =>
             {
-                Token = JsonSensitiveLoader.TokenLoad(),
-                TokenType = TokenType.Bot,
-                Intents = DiscordIntents.AllUnprivileged | DiscordIntents.MessageContent,
-                MinimumLogLevel = LogLevel.Debug,
-                LogTimestampFormat = "MMM dd yyyy - hh:mm:ss tt"
+
+                extension.AddCommands
+                ([
+                    typeof(InfoModule),
+                    typeof(UserModule),
+                    typeof(ShopModule),
+                    typeof(CoreModule)
+                ]);
+
+                TextCommandProcessor textCommandProcessor = new(new()
+                {
+                    PrefixResolver = new DefaultPrefixResolver(true, "v!", "&").ResolvePrefixAsync,
+                });
+
+                // Add text commands with a custom prefix (?ping)
+                extension.AddProcessor(textCommandProcessor);
+            }, new CommandsConfiguration()
+            {
+                // The default value is true, however it's shown here for clarity
+                RegisterDefaultCommandProcessors = true
             });
+
+
+            _client = _builder.Build();
 
         }
 
@@ -36,16 +59,7 @@ namespace Vaulty.App
         public async void Start()
         {
             await _client.ConnectAsync();
-            RegisterSlashCommands();
         }
 
-        /// <summary>
-        /// Registers every slash command to the client
-        /// </summary>
-        public void RegisterSlashCommands()
-        {
-            _client.UseApplicationCommands().RegisterGlobalCommands(Assembly.GetAssembly(typeof(UserModule)));
-
-        }
     }
 }
