@@ -28,7 +28,7 @@ namespace Vaulty.Embeds
                 new Tuple<string, string, bool>
                 (
                     "VaultCoins\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
-                    ":coin: " + u.VaultCoins.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
+                    "VAULTYCOINS_EMOJI " + u.VaultCoins.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 ),
                 new Tuple<string, string, bool>
