@@ -28,13 +28,13 @@ namespace Vaulty.Embeds
                 new Tuple<string, string, bool>
                 (
                     "VaultCoins\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
-                    "VAULTYCOINS_EMOJI " + u.VaultCoins.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
+                    Const.VAULTYCOINS_EMOJI + u.VaultCoins.ToString(" #,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 ),
                 new Tuple<string, string, bool>
                 (
                     "Vaultium  \u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
-                    ":yen: "  + u.Vaultium.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
+                    Const.VAULTIUM_EMOJI  + u.Vaultium.ToString(" #,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 ),
                 new Tuple<string, string, bool>
