@@ -81,7 +81,6 @@ namespace Vaulty.Database.Models
 
         public void InsertCommandExecution()
         {
-            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             using (DbCon dbCon = new DbCon())
             {
                 dbCon.con.Open();
@@ -91,15 +90,15 @@ namespace Vaulty.Database.Models
 
                 SqlCommand command = new SqlCommand(query, dbCon.con);
                 command.Parameters.AddWithValue("@UserId", Id);
-                command.Parameters.AddWithValue("@LastExecDaily", epoch);  // Default to current time
-                command.Parameters.AddWithValue("@LastExecWeekly", epoch);  // Default to current time
-                command.Parameters.AddWithValue("@LastExecWork", epoch);  // Default to current time
+                command.Parameters.AddWithValue("@LastExecDaily", "0");  // Default to current time
+                command.Parameters.AddWithValue("@LastExecWeekly", "0");  // Default to current time
+                command.Parameters.AddWithValue("@LastExecWork", "0");  // Default to current time
 
                 command.ExecuteNonQuery();
 
-                LastDaily = epoch.ToString();
-                LastWeekly = epoch.ToString();
-                LastWork = epoch.ToString();
+                LastDaily = "0";
+                LastWeekly = "0";
+                LastWork = "0";
             }
         }
 
