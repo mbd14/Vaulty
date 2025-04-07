@@ -36,11 +36,15 @@ namespace Vaulty.Modules
             executions.GetExecution();
 
             ResponseEmbed embed;
+            
+            string dateTimeOffset = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+            ulong elapsed = ulong.Parse(dateTimeOffset) - ulong.Parse(executions.LastDaily);
 
             // If the user already redeemed their daily reward for that day
-            if (DateTime.Parse(executions.LastDaily).Day.ToString() == DateTime.Now.Day.ToString())
+            if (elapsed < Const.SECONDS_IN_DAY)
             {
-                embed = new ResponseEmbed(ctx, "Vous avez déjà récupéré vos récompenses du jour. Revenez demain.", col: DiscordColor.Red);
+                TimeSpan remaining = TimeSpan.FromSeconds(Const.SECONDS_IN_DAY - elapsed);
+                embed = new ResponseEmbed(ctx, $"Vous avez déjà récupéré vos récompenses du jour. Revenez dans {remaining.ToString(@"hh\:mm\:ss")}.", col: DiscordColor.Red);
                 await ctx.RespondAsync(embed.builder.Build());
                 return;
             }
@@ -48,7 +52,7 @@ namespace Vaulty.Modules
             // Change data models in controler
             int reward = Const.DAILY_REWARD;
             u.VaultCoins += reward;
-            executions.LastDaily = DateTime.Now.ToString();
+            executions.LastDaily = dateTimeOffset;
 
             //Update db
             u.ModifyUser();
@@ -73,23 +77,23 @@ namespace Vaulty.Modules
             u.ReadUser();
             executions.GetExecution();
 
-            // Prepare data to get week number
-            CultureInfo myCI = new CultureInfo("en-US");
-            Calendar myCal = myCI.Calendar;
-            CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
-            DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
-
             ResponseEmbed embed;
-            if (myCal.GetWeekOfYear(DateTime.Parse(executions.LastWeekly), myCWR, myFirstDOW).ToString() == myCal.GetWeekOfYear(DateTime.Now, myCWR, myFirstDOW).ToString())
+
+            string dateTimeOffset = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+            ulong elapsed = ulong.Parse(dateTimeOffset) - ulong.Parse(executions.LastWeekly);
+
+            // If the user already redeemed their daily reward for that day
+            if (elapsed < Const.SECONDS_IN_WEEK)
             {
-                embed = new ResponseEmbed(ctx, "Vous avez déjà récupéré vos récompenses du jour. Revenez demain.", col: DiscordColor.Red);
+                TimeSpan remaining = TimeSpan.FromSeconds(Const.SECONDS_IN_WEEK - elapsed);
+                embed = new ResponseEmbed(ctx, $"Vous avez déjà récupéré vos récompenses de la semaine. Revenez dans {remaining.Days}d {remaining.Hours:D2}:{remaining.Minutes:D2}:{remaining.Seconds:D2}.", col: DiscordColor.Red);
                 await ctx.RespondAsync(embed.builder.Build());
                 return;
             }
 
             int reward = Const.WEEKLY_REWARD;
             u.VaultCoins += reward;
-            executions.LastWeekly = DateTime.Now.ToString();
+            executions.LastWeekly = dateTimeOffset;
 
             //Update db
             u.ModifyUser();

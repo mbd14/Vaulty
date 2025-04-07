@@ -13,6 +13,11 @@ namespace Vaulty.Utils
     /// </summary>
     public class Const
     {
+        public static readonly ulong SECONDS_IN_MINUTE = 60;
+        public static readonly ulong SECONDS_IN_HOUR = 3600;
+        public static readonly ulong SECONDS_IN_DAY = 86400;
+        public static readonly ulong SECONDS_IN_WEEK = 604800;
+
         #region File names
         public static readonly string TOKEN_FILE = "sensitive.json";
         public static readonly string INFO_FILE = "info.json";
