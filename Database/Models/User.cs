@@ -19,12 +19,15 @@ namespace Vaulty.Database.Models
         public bool HasBank { get; set; }
         public User() { }
 
+        /// <summary>
+        /// Insert a user in the data base
+        /// </summary>
         public void InsertUser()
         {
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank)";
+                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank, @Daily, @Weekly)";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
                 command.Parameters.AddWithValue("@VaultCoins", VaultCoins);
@@ -43,12 +46,15 @@ namespace Vaulty.Database.Models
             }
         }
 
+        /// <summary>
+        /// Fetch user from the data base
+        /// </summary>
         public void ReadUser()
         {
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "SELECT Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank FROM [USER] WHERE Id=@Id";
+                string query = "SELECT * FROM [USER] WHERE Id=@Id";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
 
@@ -68,16 +74,20 @@ namespace Vaulty.Database.Models
             }
         }
 
+        /// <summary>
+        /// Update user in the data base
+        /// </summary>
         public void ModifyUser()
         {
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "UPDATE [USER] SET VaultCoins = @VaultCoins, Bank_Amount = @Bank_Amount WHERE Id = @Id";
+                string query = "UPDATE [USER] SET VaultCoins = @VaultCoins, Vaultium=@Vaultium, Bank_Amount = @Bank_Amount WHERE Id = @Id";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
                 command.Parameters.AddWithValue("@Bank_Amount", Bank);
                 command.Parameters.AddWithValue("@VaultCoins", VaultCoins);
+                command.Parameters.AddWithValue("@Vaultium", Vaultium);
                 dbcon.con.Open();
                 command.ExecuteNonQuery();
                 dbcon.con.Close();

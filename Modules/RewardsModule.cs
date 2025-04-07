@@ -1,12 +1,134 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSharpPlus.Commands;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
+using Vaulty.Database.Models;
+using Vaulty.Embeds;
+using Vaulty.Utils;
+using CommandAttribute = DSharpPlus.Commands.CommandAttribute;
 
 namespace Vaulty.Modules
 {
-    internal class RewardsModule
+    /// <summary>
+    /// Rewards module holds the commands that give a definitive reward to the user
+    /// </summary>
+    public class RewardsModule
     {
+        public RewardsModule() { }
+
+        #region Command : Daily
+        /// <summary>
+        /// Gives the user their daily reward.
+        /// </summary>
+        [Command("daily")]
+        public async Task DailyCommand(CommandContext ctx)
+        {
+            
+            // Retrieve user and executions of user
+            User u = new User() { Id = ctx.User.Id.ToString() };
+            CommandExecutions executions = new CommandExecutions( ) { Id = ctx.User.Id.ToString() };
+            u.ReadUser();
+            executions.GetExecution();
+
+            ResponseEmbed embed;
+
+            // If the user already redeemed their daily reward for that day
+            if (DateTime.Parse(executions.LastDaily).Day.ToString() == DateTime.Now.Day.ToString())
+            {
+                embed = new ResponseEmbed(ctx, "Vous avez déjà récupéré vos récompenses du jour. Revenez demain.", col: DiscordColor.Red);
+                await ctx.RespondAsync(embed.builder.Build());
+                return;
+            }
+
+            // Change data models in controler
+            int reward = Const.DAILY_REWARD;
+            u.VaultCoins += reward;
+            executions.LastDaily = DateTime.Now.ToString();
+
+            //Update db
+            u.ModifyUser();
+            executions.ModifyExecution();
+
+            // Send answer
+            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} journalier.", reward, ":coin:"), col: DiscordColor.Green);
+            await ctx.RespondAsync(embed.builder.Build());
+
+        }
+        #endregion
+
+        #region Command : Weekly
+        /// <summary>
+        /// Gives the user their weekly reward.
+        /// </summary>
+        [Command("weekly")]
+        public async Task WeeklyCommand(CommandContext ctx)
+        {
+            User u = new User() { Id = ctx.User.Id.ToString() };
+            CommandExecutions executions = new CommandExecutions() { Id = ctx.User.Id.ToString() };
+            u.ReadUser();
+            executions.GetExecution();
+
+            // Prepare data to get week number
+            CultureInfo myCI = new CultureInfo("en-US");
+            Calendar myCal = myCI.Calendar;
+            CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
+            DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
+
+            ResponseEmbed embed;
+            if (myCal.GetWeekOfYear(DateTime.Parse(executions.LastWeekly), myCWR, myFirstDOW).ToString() == myCal.GetWeekOfYear(DateTime.Now, myCWR, myFirstDOW).ToString())
+            {
+                embed = new ResponseEmbed(ctx, "Vous avez déjà récupéré vos récompenses du jour. Revenez demain.", col: DiscordColor.Red);
+                await ctx.RespondAsync(embed.builder.Build());
+                return;
+            }
+
+            int reward = Const.WEEKLY_REWARD;
+            u.VaultCoins += reward;
+            executions.LastWeekly = DateTime.Now.ToString();
+
+            //Update db
+            u.ModifyUser();
+            executions.ModifyExecution();
+
+            // Send answer
+            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} hebdomadaires.", reward, ":coin:"), col: DiscordColor.Green);
+            await ctx.RespondAsync(embed.builder.Build());
+        }
+        #endregion
+
+        #region Command : Beg
+        /// <summary>
+        /// Gives the user a chance to earn a small amount of coins randomly.
+        /// </summary>
+        [Command("beg")]
+        public async Task BegCommand(CommandContext ctx)
+        {
+        }
+        #endregion
+
+        #region Command : Quest
+        /// <summary>
+        /// Allows the user to complete a quest for a reward.
+        /// </summary>
+        [Command("quest")]
+        public async Task QuestCommand(CommandContext ctx)
+        {
+        }
+        #endregion
+
+        #region Command : Crime
+        /// <summary>
+        /// Gives the user a chance to commit a crime for coins, with a chance to fail.
+        /// </summary>
+        [Command("crime")]
+        public async Task CrimeCommand(CommandContext ctx)
+        {
+        }
+        #endregion
     }
 }

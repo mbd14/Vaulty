@@ -39,5 +39,28 @@ namespace Vaulty.Utils
 
             return tokenElement.GetString();
         }
+
+        public static (string name, string description, string version) BotInfoLoad()
+        {
+            string filePath = Path.Combine(AppContext.BaseDirectory, Const.INFO_FILE);
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Bot info file not found.");
+
+            string json = File.ReadAllText(filePath);
+
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+
+            if (!root.TryGetProperty("name", out JsonElement nameElement))
+                throw new Exception("Name property missing in bot info file.");
+
+            if (!root.TryGetProperty("description", out JsonElement descriptionElement))
+                throw new Exception("Description property missing in bot info file.");
+
+            if (!root.TryGetProperty("version", out JsonElement versionElement))
+                throw new Exception("Version property missing in bot info file.");
+
+            return (nameElement.GetString(), descriptionElement.GetString(), versionElement.GetString());
+        }
     }
 }

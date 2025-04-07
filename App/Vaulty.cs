@@ -10,6 +10,9 @@ using static Vaulty.Modules.UserModule;
 
 namespace Vaulty.App
 {
+    /// <summary>
+    /// Vaulty object that's the root of the app
+    /// </summary>
     public class Vaulty
     {
         public DiscordClientBuilder _builder;
@@ -31,8 +34,9 @@ namespace Vaulty.App
                 ([
                     typeof(InfoModule),
                     typeof(UserModule),
+                    typeof(CoreModule),
                     typeof(ShopModule),
-                    typeof(CoreModule)
+                    typeof(RewardsModule),
                 ]);
 
                 TextCommandProcessor textCommandProcessor = new(new()
@@ -60,6 +64,5 @@ namespace Vaulty.App
         {
             await _client.ConnectAsync();
         }
-
     }
 }

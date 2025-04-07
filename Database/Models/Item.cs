@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Vaulty.Database.Models
 {
+    /// <summary>
+    /// Represents an item.
+    /// </summary>
     public class Item
     {
         public string Label { get; set; }         // Unique identifier or name

@@ -7,6 +7,9 @@ using Microsoft.Data.SqlClient;
 
 namespace Vaulty.Database.Models
 {
+    /// <summary>
+    /// Represents the Shop object
+    /// </summary>
     public class Shop
     {
         public List<Item> Items { get; set; }
@@ -16,7 +19,9 @@ namespace Vaulty.Database.Models
             Items = new List<Item>();
         }
 
-
+        /// <summary>
+        /// Read shop data base and get all records from DB
+        /// </summary>
         public void GetShop()
         {
             DbCon dbcon = new DbCon();

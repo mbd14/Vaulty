@@ -2,6 +2,7 @@
 using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
+using Vaulty.Utils;
 
 namespace Vaulty.Modules
 {
@@ -15,13 +16,16 @@ namespace Vaulty.Modules
         [Command("info")]
         public async Task InfoCommand(CommandContext ctx)
         {
+
+            var info = JsonSensitiveLoader.BotInfoLoad();
+
             var embed = new DiscordEmbedBuilder()
             .WithTitle("Bot Information")
             .WithColor(DiscordColor.Cyan)
             .WithThumbnail(App.Vaulty._client.CurrentUser.AvatarUrl) // Bot's profile picture
-            .AddField("Name", App.Vaulty._client.CurrentUser.Username, true)
-            .AddField("Version", "Alpha 0.1", true)
-            .AddField("Description", "A feature-rich economy discord bot")
+            .AddField("Name", info.name, true)
+            .AddField("Version", info.version, true)
+            .AddField("Description", info.description)
             .WithFooter($"Requested by {ctx.User.GlobalName}", ctx.User.AvatarUrl)
             .WithTimestamp(DateTime.UtcNow);
 
