@@ -100,6 +100,7 @@ namespace Vaulty.Utils
 
         #region assets
         public static readonly string VAULTYCOINS_EMOJI = "<:vaultycoins:1358895330300788927>";
+        public static readonly string VAULTIUM_EMOJI = "<:vtium:1358901632154337370>";
         #endregion
     }
 }
