@@ -8,6 +8,9 @@ using DSharpPlus.Entities;
 
 namespace Vaulty.Utils
 {
+    /// <summary>
+    /// The ArgumentValidator class holds all the methods that control argument types and values before doing anything after a command was prompted by a user
+    /// </summary>
     public class ArgumentValidator
     {
         public static bool DepositCheck(CommandContext ctx, string[] args)

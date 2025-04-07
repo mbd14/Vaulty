@@ -7,6 +7,9 @@ using Vaulty.Utils;
 
 namespace Vaulty.Modules
 {
+    /// <summary>
+    /// Represents an embed that displays the shop. Inherits from the generic VaultyEmbed
+    /// </summary>
     public class InfoModule : ApplicationCommandModule
     {
         /// <summary>

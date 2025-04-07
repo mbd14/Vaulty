@@ -8,7 +8,9 @@ using Microsoft.Data.SqlClient;
 namespace Vaulty.Database.Models
 {
     /// <summary>
-    /// Data Model that represent a user
+    /// Data Model that represent a user in the USER table
+    /// Contains methods to manipulate individual rows of the represented table or the whole table.
+    /// DO NOT EDIT THIS CODE IF YOU DONT KNOW WHAT YOU ARE DOING
     /// </summary>
     public class User
     {

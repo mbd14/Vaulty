@@ -8,6 +8,10 @@ using Vaulty.Utils;
 
 namespace Vaulty.Modules
 {
+    /// <summary>
+    /// User module holds commands to tamper with the user database directly
+    /// Used for debug purpouse.
+    /// </summary>
     public class UserModule : ApplicationCommandModule
     {
         /// <summary>

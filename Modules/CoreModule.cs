@@ -115,6 +115,15 @@ namespace Vaulty.Modules
         #endregion
 
         #region Command : Pay
+        /// <summary>
+        /// The pay command allows a user to pay a certain amount of money to another user.
+        /// The first argument is the user you wish to pay. Can be anyone but yourself
+        /// The second argument is the amount of money. Amount shouldn't be more than what you own
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="usr"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [Command("pay")]
         public async Task PayCommand(CommandContext ctx, DiscordUser usr, int amount)
         {

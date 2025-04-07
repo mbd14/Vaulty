@@ -7,6 +7,10 @@ using Microsoft.Data.SqlClient;
 
 namespace Vaulty.Database.Models
 {
+    /// <summary>
+    /// Data Model used to represent a row in the COMMAND_EXECUTION table from the SQL DB.
+    /// Contains methods to manipulate individual rows of the represented table.
+    /// </summary>
     public class CommandExecutions
     {
         public string Id { get; set; }
