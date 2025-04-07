@@ -96,9 +96,10 @@ namespace Vaulty.Utils
         public static readonly string USAGE_SETBALANCE = "Usage : v!setbalance <user> <amount>";
         public static readonly string USAGE_RESETUSER = "Usage : v!resetuser <user>";
         public static readonly string USAGE_ECONOMY_STATS = "Usage : v!economy stats";
+        #endregion
 
-
-
+        #region assets
+        public static readonly string VAULTYCOINS_EMOJI = "<:vaultycoins:1358895330300788927>";
         #endregion
     }
 }

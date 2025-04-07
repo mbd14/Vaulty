@@ -55,7 +55,7 @@ namespace Vaulty.Modules
             executions.ModifyExecution();
 
             // Send answer
-            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} journalier.", reward, ":coin:"), col: DiscordColor.Green);
+            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} journalier.", reward, Const.VAULTYCOINS_EMOJI), col: DiscordColor.Green);
             await ctx.RespondAsync(embed.builder.Build());
 
         }
@@ -96,7 +96,7 @@ namespace Vaulty.Modules
             executions.ModifyExecution();
 
             // Send answer
-            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} hebdomadaires.", reward, ":coin:"), col: DiscordColor.Green);
+            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu vos {0} {1} hebdomadaires.", reward, Const.VAULTYCOINS_EMOJI), col: DiscordColor.Green);
             await ctx.RespondAsync(embed.builder.Build());
         }
         #endregion

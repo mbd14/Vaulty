@@ -70,8 +70,14 @@ namespace Vaulty.Modules
 
             // Modify the user 
             u.ModifyUser();
-
-            ResponseEmbed reponse = new ResponseEmbed(ctx, "Vous avez déposé votre argent", DiscordColor.Green);
+            
+            ResponseEmbed reponse = new ResponseEmbed
+                (
+                ctx, 
+                string.Format("Vous avez déposé {0} {1} dans votre banque", 
+                depositAmount, Const.VAULTYCOINS_EMOJI), 
+                DiscordColor.Green
+                );
             await ctx.RespondAsync("", reponse.builder.Build());
 
         }
@@ -106,7 +112,13 @@ namespace Vaulty.Modules
             // Modify the user 
             u.ModifyUser();
 
-            ResponseEmbed reponse = new ResponseEmbed(ctx, "Vous avez retiré votre argent", DiscordColor.Green);
+            ResponseEmbed reponse = new ResponseEmbed
+                (
+                ctx, 
+                string.Format("Vous avez retiré {0} {1} de votre banque", withdrawAmount, Const.VAULTYCOINS_EMOJI), 
+                DiscordColor.Green
+                );
+
             await ctx.RespondAsync("", reponse.builder.Build());
 
         }
@@ -146,7 +158,14 @@ namespace Vaulty.Modules
             payed_u.ModifyUser();
 
 
-            ResponseEmbed reponse = new ResponseEmbed(ctx, string.Format("Vous avez payé {0} {1} VaultCoins", usr.Mention, amount), DiscordColor.Green);
+            ResponseEmbed reponse = new ResponseEmbed
+                (
+                ctx,
+                string.Format("Vous avez payé {0} {1} {2}", 
+                usr.Mention, amount, Const.VAULTYCOINS_EMOJI), 
+                DiscordColor.Green
+                );
+
             await ctx.RespondAsync("", reponse.builder.Build());
         }
         #endregion
