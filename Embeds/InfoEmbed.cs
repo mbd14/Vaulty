@@ -10,6 +10,9 @@ using Vaulty.Utils;
 
 namespace Vaulty.Embeds
 {
+    /// <summary>
+    /// Represents an embed that displays the bot's information
+    /// </summary>
     public class InfoEmbed : VaultyEmbed
     {
         public InfoEmbed(CommandContext ctx, string name, string description, string version)

@@ -10,6 +10,9 @@ using Vaulty.Utils;
 
 namespace Vaulty.Embeds
 {
+    /// <summary>
+    /// Represents an embed that displays the user balance.
+    /// </summary>
     public class BalanceEmbed : VaultyEmbed
     {
 

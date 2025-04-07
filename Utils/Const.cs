@@ -8,6 +8,9 @@ using Azure.Core;
 
 namespace Vaulty.Utils
 {
+    /// <summary>
+    /// The Const class holds all the constant values used by the bot
+    /// </summary>
     public class Const
     {
         #region File names
@@ -16,8 +19,8 @@ namespace Vaulty.Utils
         #endregion
 
         #region Default values for DB insert/update
-        public static readonly int USER_ADD_DEFAULT_COINS = 1000;
-        public static readonly int USER_ADD_DEFAULT_VAULTIUM = 5;
+        public static readonly int USER_ADD_DEFAULT_COINS = 500;
+        public static readonly int USER_ADD_DEFAULT_VAULTIUM = 0;
         #endregion
 
         #region Default rewards

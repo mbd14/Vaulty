@@ -11,7 +11,9 @@ using static Vaulty.Modules.UserModule;
 namespace Vaulty.App
 {
     /// <summary>
-    /// Vaulty object that's the root of the app
+    /// Vaulty object.
+    /// Root of every command call.
+    /// Holds the discord client and its configuration
     /// </summary>
     public class Vaulty
     {
@@ -29,7 +31,7 @@ namespace Vaulty.App
             // Setup the commands extension
             _builder.UseCommands((IServiceProvider serviceProvider, CommandsExtension extension) =>
             {
-
+                // Adding command modules
                 extension.AddCommands
                 ([
                     typeof(InfoModule),
@@ -52,7 +54,7 @@ namespace Vaulty.App
                 RegisterDefaultCommandProcessors = true
             });
 
-
+            // Build client
             _client = _builder.Build();
 
         }

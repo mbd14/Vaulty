@@ -9,6 +9,7 @@ namespace Vaulty.Database.Models
 {
     /// <summary>
     /// Represents the Shop object
+    /// 
     /// </summary>
     public class Shop
     {
@@ -25,7 +26,7 @@ namespace Vaulty.Database.Models
         public void GetShop()
         {
             DbCon dbcon = new DbCon();
-            string query = "SELECT Label, Description, Price FROM SHOP_ITEMS";
+            string query = "SELECT * FROM SHOP_ITEMS";
             dbcon.con.Open();
             using (SqlCommand cmd = new SqlCommand(query, dbcon.con))
             using (SqlDataReader reader = cmd.ExecuteReader())

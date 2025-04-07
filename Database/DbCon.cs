@@ -9,7 +9,10 @@ using Vaulty.Database.Models;
 
 namespace Vaulty.Database
 {
-
+    /// <summary>
+    /// Represent a connection in the SQL SERVER database.
+    /// Since localhost is used, the auth string can be visible.
+    /// </summary>
     public class DbCon : DbContext
     {
         public readonly string connectionString = "Server=sqlserver,1433;Database=master;User Id=sa;Password=password1*;TrustServerCertificate=True;";

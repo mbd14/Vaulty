@@ -23,7 +23,7 @@ namespace Vaulty.Modules
 
         #region Command : Daily
         /// <summary>
-        /// Gives the user their daily reward.
+        /// Gives the user their daily VaultyCoins reward.
         /// </summary>
         [Command("daily")]
         public async Task DailyCommand(CommandContext ctx)

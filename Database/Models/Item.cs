@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Vaulty.Database.Models
 {
     /// <summary>
-    /// Represents an item.
+    /// Data Model used to represent a row in the SHOP_ITEMS table from the SQL DB.
     /// </summary>
     public class Item
     {
