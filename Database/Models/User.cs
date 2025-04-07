@@ -29,7 +29,7 @@ namespace Vaulty.Database.Models
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank, @Daily, @Weekly)";
+                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank)";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
                 command.Parameters.AddWithValue("@VaultCoins", VaultCoins);
@@ -71,8 +71,14 @@ namespace Vaulty.Database.Models
                     Bank = reader.GetInt32(reader.GetOrdinal("Bank_Amount"));
                     HasBank = reader.GetBoolean(reader.GetOrdinal("Has_Bank"));
                 }
+                else
+                {
+                    dbcon.con.Close();
+                    InsertUser();
+                    return;
+                }
 
-                dbcon.con.Close();
+                    dbcon.con.Close();
             }
         }
 
