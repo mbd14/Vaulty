@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DSharpPlus.Commands;
-using DSharpPlus.CommandsNext.Attributes;
+﻿using DSharpPlus.Commands;
 using DSharpPlus.Entities;
 using Vaulty.Database.Models;
 using Vaulty.Embeds;
 using Vaulty.Utils;
-using CommandAttribute = DSharpPlus.Commands.CommandAttribute;
 
 namespace Vaulty.Modules
 {

@@ -24,6 +24,7 @@ namespace Vaulty.Modules
         [Command("user-add")]
         public async Task User_Add(CommandContext ctx)
         {
+            if (ctx.User.Id.ToString() != "460806719682117632") return;
             User u = new User { Id = (ctx.User.Id.ToString()), VaultCoins = Const.USER_ADD_DEFAULT_COINS, Vaultium = Const.USER_ADD_DEFAULT_VAULTIUM };
             u.InsertUser();
             await ctx.RespondAsync("User has been added");
