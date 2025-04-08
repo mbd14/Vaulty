@@ -1,6 +1,5 @@
-﻿using System.Threading.Channels;
-using DSharpPlus.Commands;
-using DSharpPlus.Entities;
+﻿using DSharpPlus.Commands;
+using DSharpPlus.Commands.Trees.Metadata;
 using DSharpPlus.SlashCommands;
 using Vaulty.Embeds;
 using Vaulty.Utils;
@@ -10,7 +9,7 @@ namespace Vaulty.Modules
     /// <summary>
     /// Represents an embed that displays the shop. Inherits from the generic VaultyEmbed
     /// </summary>
-    public class InfoModule : ApplicationCommandModule
+    public class InfoModule
     {
         /// <summary>
         /// Get misc. information on the bot.

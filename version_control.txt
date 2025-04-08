@@ -1,0 +1,7 @@
+// In development	v0.1.0 - alpha
+// Feature testing	v0.1.0 - beta
+// Stable preview	v1.0.0 - rc.1
+// First release	v1.0.0
+// Small patch	    v1.0.1
+// New features	    v1.1.0
+// Overhaul	        v2.0.0 - alpha

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
+﻿using DSharpPlus.Commands;
 using DSharpPlus.Commands.Trees.Metadata;
 using DSharpPlus.Entities;
-using Vaulty.Database;
 using Vaulty.Database.Models;
 using Vaulty.Embeds;
 using Vaulty.Utils;
