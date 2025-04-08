@@ -44,7 +44,7 @@ namespace Vaulty.Modules
             if (elapsed < Const.SECONDS_IN_DAY)
             {
                 TimeSpan remaining = TimeSpan.FromSeconds(Const.SECONDS_IN_DAY - elapsed);
-                embed = new ResponseEmbed(ctx, $"Vous avez déjà récupéré vos récompenses du jour. Revenez dans {remaining.ToString(@"hh\:mm\:ss")}.", col: DiscordColor.Red);
+                embed = new ResponseEmbed(ctx, $"Vous avez déjà récupéré vos récompenses du jour. Vous pouvez relancer la commande à cette date : <t:{ulong.Parse(executions.LastDaily) + Const.SECONDS_IN_DAY}:F>.", col: DiscordColor.Red);
                 await ctx.RespondAsync(embed.builder.Build());
                 return;
             }
