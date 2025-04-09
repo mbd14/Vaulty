@@ -40,7 +40,7 @@ namespace Vaulty.Utils
             return tokenElement.GetString();
         }
 
-        public static (string name, string description, string version) BotInfoLoad()
+        public static (string name, string description, string version, int bonus) BotInfoLoad()
         {
             string filePath = Path.Combine(AppContext.BaseDirectory, Const.INFO_FILE);
             if (!File.Exists(filePath))
@@ -60,7 +60,10 @@ namespace Vaulty.Utils
             if (!root.TryGetProperty("version", out JsonElement versionElement))
                 throw new Exception("Version property missing in bot info file.");
 
-            return (nameElement.GetString(), descriptionElement.GetString(), versionElement.GetString());
+            if (!root.TryGetProperty("bonus", out JsonElement bonus))
+                throw new Exception("Bonus property missing in bot info file.");
+
+            return (nameElement.GetString(), descriptionElement.GetString(), versionElement.GetString(), bonus.GetInt32());
         }
     }
 }

@@ -41,8 +41,11 @@ namespace Vaulty.Modules
                 return;
             }
 
+            executions.DailyStreak = elapsed < 2 * Const.SECONDS_IN_DAY ? executions.DailyStreak + 1 : 0;
+            double multiplier = executions.DailyStreak > 14 ? 4 : 1 + executions.DailyStreak * Const.DAILY_STREAK_INCR;
+
             // Change data models in controler
-            int reward = Const.DAILY_REWARD;
+            int reward = (int)(Const.DAILY_REWARD * multiplier);
             u.VaultCoins += reward;
             executions.LastDaily = dateTimeOffset;
 
@@ -83,7 +86,9 @@ namespace Vaulty.Modules
                 return;
             }
 
-            int reward = Const.WEEKLY_REWARD;
+            double multiplier = executions.DailyStreak > 14 ? 4 : 1 + executions.DailyStreak * Const.DAILY_STREAK_INCR;
+
+            int reward = (int)(Const.WEEKLY_REWARD * multiplier);
             u.VaultCoins += reward;
             executions.LastWeekly = dateTimeOffset;
 

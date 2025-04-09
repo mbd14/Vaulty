@@ -22,7 +22,12 @@ namespace Vaulty.Embeds
             List<Tuple<string, string, bool>> t_items = new List<Tuple<string, string, bool>>();
             foreach (Item i in s.Items)
             {
-                t_items.Add(new Tuple<string, string, bool>(string.Format("{0} - {1}", i.Label, i.Price.ToString()), i.Description, false));
+                t_items.Add(new Tuple<string, string, bool>
+                    (
+                    $"{i.Label}\n{string.Format("{0} {1}", Const.VAULTYCOINS_EMOJI, i.Price.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'))}", 
+                    i.Description, 
+                    false
+                    ));
             }
 
             BuildBasicEmbed

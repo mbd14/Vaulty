@@ -21,6 +21,8 @@ namespace Vaulty.App
 
         public static DiscordClient _client;
 
+        public static int bonus = JsonSensitiveLoader.BotInfoLoad().bonus;
+
         /// <summary>
         /// Configurate the Discord Client
         /// </summary>
