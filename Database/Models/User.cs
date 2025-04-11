@@ -78,7 +78,7 @@ namespace Vaulty.Database.Models
                     return;
                 }
 
-                    dbcon.con.Close();
+                dbcon.con.Close();
             }
         }
 

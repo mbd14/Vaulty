@@ -1,4 +1,5 @@
 ﻿using DSharpPlus.Commands;
+using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.Trees.Metadata;
 using DSharpPlus.Entities;
 using Vaulty.Database.Models;
@@ -10,6 +11,7 @@ namespace Vaulty.Modules
     [Command("job")]
     public class JobsModule
     {
+
         [Command("list")]
         public async Task ListJobs(CommandContext ctx)
         {
