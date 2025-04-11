@@ -26,7 +26,7 @@ namespace Vaulty.Database.Models
         public void GetShop()
         {
             DbCon dbcon = new DbCon();
-            string query = "SELECT * FROM SHOP_ITEMS";
+            string query = "SELECT * FROM SHOP_ITEMS ORDER BY ItemType ASC, Price ASC;";
             dbcon.con.Open();
             using (SqlCommand cmd = new SqlCommand(query, dbcon.con))
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -35,9 +35,11 @@ namespace Vaulty.Database.Models
                 {
                     Items.Add(new Item
                     {
-                        Label = reader.GetString(0),
-                        Description = reader.GetString(1),
-                        Price = reader.GetInt32(2)
+                        Id = reader.GetInt32(0),
+                        Label = reader.GetString(1),
+                        Description = reader.GetString(2),
+                        Price = reader.GetInt32(3),
+                        ItemType = reader.GetInt32(4),
                     });
                 }
             }
