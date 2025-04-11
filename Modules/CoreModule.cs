@@ -161,5 +161,21 @@ namespace Vaulty.Modules
             await ctx.RespondAsync("", reponse.builder.Build());
         }
         #endregion
+
+
+        #region Command : Richest
+        [Command("richest")]
+        public async Task RichestCommand(CommandContext ctx)
+        {
+            List<User> topUsers = User.GetTopUsers();
+
+            // Construct embed to display richest users
+            RichestEmbed embed = new RichestEmbed(topUsers, ctx);
+
+            // Build and send the embed
+            await ctx.RespondAsync("", embed.builder.Build());
+        }
+
+        #endregion
     }
 }

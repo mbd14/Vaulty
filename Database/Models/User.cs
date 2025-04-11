@@ -101,5 +101,38 @@ namespace Vaulty.Database.Models
                 dbcon.con.Close();
             }
         }
+
+        public static List<User> GetTopUsers()
+        {
+            List<User> topUsers = new List<User>();
+            DbCon dbcon = new DbCon();
+
+            using (dbcon)
+            {
+                string query = "SELECT TOP 10 * FROM [USER] ORDER BY VaultCoins DESC";
+                SqlCommand command = new SqlCommand(query, dbcon.con);
+
+                dbcon.con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    User u = new User
+                    {
+                        Id = reader.GetString(reader.GetOrdinal("Id")),
+                        VaultCoins = reader.GetInt32(reader.GetOrdinal("VaultCoins")),
+                        Vaultium = reader.GetInt32(reader.GetOrdinal("Vaultium")),
+                        Bank = reader.GetInt32(reader.GetOrdinal("Bank_Amount")),
+                        HasBank = reader.GetBoolean(reader.GetOrdinal("Has_Bank"))
+                    };
+
+                    topUsers.Add(u);
+                }
+
+                dbcon.con.Close();
+            }
+
+            return topUsers;
+        }
     }
 }
