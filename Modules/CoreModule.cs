@@ -188,11 +188,25 @@ namespace Vaulty.Modules
             // Build and send the embed
             await ctx.RespondAsync("", embed.builder.Build());
         }
+        #endregion
 
         [Command("give")]
         public async Task GiveCommand(CommandContext ctx, DiscordUser usr, int amount)
         {
             ResponseEmbed reponse;
+            if (!ctx.Member.Permissions.HasPermission(DiscordPermission.Administrator))
+            {
+                reponse = new ResponseEmbed
+                    (
+                    ctx,
+                    string.Format("Vous ne pouvez pas faire ca",
+                    usr.Mention, amount, Const.VAULTYCOINS_EMOJI),
+                    DiscordColor.Red
+                    );
+                await ctx.RespondAsync("", reponse.builder.Build());
+                return;
+            }
+            
             string[] args = [usr.Id.ToString(), amount.ToString()];
             if (!ArgumentValidator.PayCheck(ctx, args)) return;
 
@@ -212,7 +226,5 @@ namespace Vaulty.Modules
 
             await ctx.RespondAsync("", reponse.builder.Build());
         }
-
-        #endregion
     }
 }
