@@ -46,7 +46,7 @@ namespace Vaulty.App
 
                 TextCommandProcessor textCommandProcessor = new(new()
                 {
-                    PrefixResolver = new DefaultPrefixResolver(true, "v!", "&").ResolvePrefixAsync,
+                    PrefixResolver = new DefaultPrefixResolver(true, "v!", "&", "!").ResolvePrefixAsync,
                 });
 
                 // Add text commands with a custom prefix (?ping)
