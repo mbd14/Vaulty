@@ -21,7 +21,7 @@ namespace Vaulty.Modules
         /// <param name="ctx"></param>
         /// <returns></returns>
         [Command("balance")]
-        [TextAlias("bal")]
+        [TextAlias("bal", "coins")]
         public async Task BalanceCommand(CommandContext ctx)
         {
             // Retrieve user that executed the command

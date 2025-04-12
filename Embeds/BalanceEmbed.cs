@@ -27,19 +27,19 @@ namespace Vaulty.Embeds
                 {
                 new Tuple<string, string, bool>
                 (
-                    "VaultCoins\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
+                    "VaultCoinsㅤㅤㅤㅤㅤㅤ",
                     Const.VAULTYCOINS_EMOJI + u.VaultCoins.ToString(" #,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 ),
                 new Tuple<string, string, bool>
                 (
-                    "Vaultium  \u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
+                    "Vaultium   ㅤㅤㅤㅤㅤㅤ",
                     Const.VAULTIUM_EMOJI  + u.Vaultium.ToString(" #,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 ),
                 new Tuple<string, string, bool>
                 (
-                    "Bank      \u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc\u1cbc",
+                    "Bank       ㅤㅤㅤㅤㅤㅤ",
                     ":bank: " + u.Bank.ToString("#,0", System.Globalization.CultureInfo.InvariantCulture).Replace(',', '.'),
                     true
                 )
