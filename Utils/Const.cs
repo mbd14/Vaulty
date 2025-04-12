@@ -32,7 +32,7 @@ namespace Vaulty.Utils
         public static readonly int DAILY_REWARD = 80;
         public static readonly int WEEKLY_REWARD = 500;
         public static readonly int WORK_REWARD_MIN = 100;
-        public static readonly int WORK_REWARD_MAX = 200;
+        public static readonly int WORK_REWARD_MAX = 250;
 
         #endregion
 
