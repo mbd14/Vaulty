@@ -57,7 +57,7 @@ namespace Vaulty.Modules
 
             // Change data models in controler
             Random n = new Random(int.Parse(dateTimeOffset));
-            int reward = n.Next(Const.WORK_REWARD, Const.WORK_REWARD * 2) ;
+            int reward = n.Next(Const.WORK_REWARD_MIN, Const.WORK_REWARD_MAX) ;
             u.VaultCoins += reward;
             executions.LastWork = dateTimeOffset;
 

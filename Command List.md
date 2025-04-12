@@ -69,7 +69,7 @@
 | Commande                    | Description                                         | Exemple d'Utilisation     | Disponible |
 | ----------------------------- | ----------------------------------------------------- | --------------------------- | ------------ |
 | `v!shop`                    | Affiche les objets disponibles à l'achat.          | `v!shop`                  | ✅         |
-| `v!buy [objet]`             | Achete un objet spécifique du magasin.             | `v!buy Sword`             | ❌         |
+| `v!buy [objet]`             | Achete un objet spécifique du magasin.             | `v!buy Sword`             | ✅         |
 | `v!sell [objet]`            | Vend un objet spécifique de l'inventaire.          | `v!sell Potion`           | ❌         |
 | `v!inventory`               | Affiche l'inventaire de l'utilisateur.              | `v!inventory`             | ❌         |
 | `v!use [objet]`             | Utilise un objet spécifique de l'inventaire.       | `v!use HealingPotion`     | ❌         |

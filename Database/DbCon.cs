@@ -15,7 +15,7 @@ namespace Vaulty.Database
     /// </summary>
     public class DbCon : DbContext
     {
-        public readonly string connectionString = "Server=sqlserver,1433;Database=master;User Id=sa;Password=password1*;TrustServerCertificate=True;";
+        public readonly string connectionString = "Server=sqlserver,1433;Database=VaultyDB;User Id=sa;Password=password1*;TrustServerCertificate=True;";
         public SqlConnection con;
 
         public DbCon()

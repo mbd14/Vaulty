@@ -31,7 +31,9 @@ namespace Vaulty.Utils
         #region Default rewards
         public static readonly int DAILY_REWARD = 80;
         public static readonly int WEEKLY_REWARD = 500;
-        public static readonly int WORK_REWARD = 20;
+        public static readonly int WORK_REWARD_MIN = 100;
+        public static readonly int WORK_REWARD_MAX = 200;
+
         #endregion
 
         #region Streaks and Increments
