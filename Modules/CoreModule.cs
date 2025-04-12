@@ -131,6 +131,7 @@ namespace Vaulty.Modules
         [Command("pay")]
         public async Task PayCommand(CommandContext ctx, DiscordUser usr, int amount)
         {
+            ResponseEmbed reponse;
             string[] args =  [usr.Id.ToString(), amount.ToString()];
             if (!ArgumentValidator.PayCheck(ctx, args)) return;
 
@@ -142,6 +143,18 @@ namespace Vaulty.Modules
             paying_u.ReadUser();
             payed_u.ReadUser();
 
+            if(paying_u.VaultCoins < amount)
+            {
+                reponse = new ResponseEmbed
+                    (
+                    ctx,
+                    string.Format("Vous n'avez pas assez d'argent pour faire ça.",
+                    usr.Mention, amount, Const.VAULTYCOINS_EMOJI),
+                    DiscordColor.Red
+                    );
+                await ctx.RespondAsync("", reponse.builder.Build());
+            }
+
             // Update balance
             paying_u.VaultCoins -= amount;
             payed_u.VaultCoins += amount;
@@ -150,7 +163,7 @@ namespace Vaulty.Modules
             payed_u.ModifyUser();
 
 
-            ResponseEmbed reponse = new ResponseEmbed
+            reponse = new ResponseEmbed
                 (
                 ctx,
                 string.Format("Vous avez payé {0} {1} {2}", 
@@ -174,6 +187,30 @@ namespace Vaulty.Modules
 
             // Build and send the embed
             await ctx.RespondAsync("", embed.builder.Build());
+        }
+
+        [Command("give")]
+        public async Task GiveCommand(CommandContext ctx, DiscordUser usr, int amount)
+        {
+            ResponseEmbed reponse;
+            string[] args = [usr.Id.ToString(), amount.ToString()];
+            if (!ArgumentValidator.PayCheck(ctx, args)) return;
+
+            User payed_u = new User() { Id = usr.Id.ToString() };
+
+            payed_u.ReadUser();
+            payed_u.VaultCoins += amount;
+            payed_u.ModifyUser();
+
+            reponse = new ResponseEmbed
+                (
+                ctx,
+                string.Format("Vous avez payé {0} {1} {2}",
+                usr.Mention, amount, Const.VAULTYCOINS_EMOJI),
+                DiscordColor.Green
+                );
+
+            await ctx.RespondAsync("", reponse.builder.Build());
         }
 
         #endregion
