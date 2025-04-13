@@ -1,5 +1,6 @@
 {
     "name": "Vaulty",
-    "description" : "A feature-rich economy bot for your discord server.",
-    "version": "Alpha 0.1",
+    "description": "A feature-rich economy bot for your discord server.",
+    "version": "v0.2.0 - alpha",
+    "bonus":  1
 }
