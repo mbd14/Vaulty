@@ -90,7 +90,7 @@ namespace Vaulty.Utils
                 ctx.RespondAsync("", vaultyEmbed.builder.Build());
                 return false;
             }
-            if (args[0] == ctx.User.Id.ToString())
+            if (args[0] == ctx.User.Id.ToString() && !ctx.Member.Permissions.HasPermission(DiscordPermission.Administrator))
             {
                 VaultyEmbed vaultyEmbed = new VaultyEmbed();
 
