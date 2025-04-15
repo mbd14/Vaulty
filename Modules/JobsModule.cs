@@ -15,7 +15,7 @@ namespace Vaulty.Modules
         [Command("list")]
         public async Task ListJobs(CommandContext ctx)
         {
-            await ctx.RespondAsync("Here are the available jobs...");
+            
         }
 
         [Command("apply")]
@@ -33,16 +33,16 @@ namespace Vaulty.Modules
         [Command("work")]
         public async Task WorkJob(CommandContext ctx)
         {
-            //await ctx.RespondAsync("You did your job and earned coins!");
-
-            // Retrieve user and executions of user
-            User u = new User() { Id = ctx.User.Id.ToString() };
-            CommandExecutions executions = new CommandExecutions() { Id = ctx.User.Id.ToString() };
-            u.ReadUser();
-            executions.GetExecution();
-
             ResponseEmbed embed;
 
+            // Retrieve user
+            User u = new User() { Id = ctx.User.Id.ToString() };
+            u.ReadUser();
+            // Retrieve user executions
+            CommandExecutions executions = new CommandExecutions() { Id = ctx.User.Id.ToString() };
+            executions.GetExecution();
+
+            
             string dateTimeOffset = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
             ulong elapsed = ulong.Parse(dateTimeOffset) - ulong.Parse(executions.LastWork);
 
