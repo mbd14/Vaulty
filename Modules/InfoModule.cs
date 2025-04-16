@@ -1,6 +1,7 @@
 ﻿using DSharpPlus.Commands;
 using DSharpPlus.Commands.Trees.Metadata;
 using DSharpPlus.SlashCommands;
+using Vaulty.Database.Models;
 using Vaulty.Embeds;
 using Vaulty.Utils;
 
@@ -25,6 +26,24 @@ namespace Vaulty.Modules
             InfoEmbed embed = new InfoEmbed(ctx, info.name, info.description, info.version);
             
             await ctx.RespondAsync(embed.builder.Build());
+        }
+
+        [Command("cooldown")]
+        [TextAlias("cd")]
+        public async Task CooldownCommand(CommandContext ctx)
+        {
+            
+            User u = new User() { Id = ctx.User.Id.ToString()};
+            CommandExecutions commandExecutions = new CommandExecutions() { Id = ctx.User.Id.ToString()};
+
+            u.ReadUser();
+            commandExecutions.GetExecution();
+
+
+            CooldownEmbed response = new CooldownEmbed(ctx, u, commandExecutions);
+
+            await ctx.RespondAsync(response.builder.Build());
+
         }
     }
 }

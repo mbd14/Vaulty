@@ -71,4 +71,14 @@ namespace Vaulty.Modules
 
         }
     }
+
+    public class LegacyJobModule()
+    {
+        [Command("work")]
+        public async Task workCommandLegacy(CommandContext ctx)
+        {
+            JobsModule module = new JobsModule();
+            await module.WorkJob(ctx);
+        }
+    }
 }

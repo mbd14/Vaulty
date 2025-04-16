@@ -42,6 +42,7 @@ namespace Vaulty.App
                     typeof(ShopModule),
                     typeof(RewardsModule),
                     typeof(JobsModule),
+                    typeof(LegacyJobModule),
                     typeof(AdminModule),
                 ]);
 
