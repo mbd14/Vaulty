@@ -15,7 +15,13 @@ namespace Vaulty.Modules
         [Command("list")]
         public async Task ListJobs(CommandContext ctx)
         {
-            
+            JobListEmbed embed;
+
+            List<Job> jobs = Job.GetJobList();
+
+            embed = new JobListEmbed(ctx, jobs);
+
+            await ctx.RespondAsync(embed.builder.Build());
         }
 
         [Command("apply")]
