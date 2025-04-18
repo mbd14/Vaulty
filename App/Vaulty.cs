@@ -44,6 +44,7 @@ namespace Vaulty.App
                     typeof(JobsModule),
                     typeof(LegacyJobModule),
                     typeof(AdminModule),
+                    typeof(HelpModule),
                 ]);
 
                 TextCommandProcessor textCommandProcessor = new(new()

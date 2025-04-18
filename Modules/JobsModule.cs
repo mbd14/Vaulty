@@ -25,9 +25,31 @@ namespace Vaulty.Modules
         }
 
         [Command("apply")]
-        public async Task ApplyJob(CommandContext ctx, string jobName)
+        public async Task ApplyJob(CommandContext ctx, int jobId)
         {
-            await ctx.RespondAsync($"You applied for the job: {jobName}");
+            ResponseEmbed embed;
+
+            Job j = new Job();
+
+            j.GetJob(jobId);
+
+            if(j.Id == -1)
+            {
+                embed = new ResponseEmbed(ctx, "Ce metier n'existe pas", DiscordColor.Red);
+                await ctx.RespondAsync(embed.builder.Build());
+                return;
+            }
+
+            User u = new User() { Id = ctx.User.Id.ToString() };
+            u.ReadUser();
+            u.Job = jobId;
+            u.ModifyUser();
+
+            embed = new ResponseEmbed(ctx, $"Vous exercez mainetant le metier : **{j.Label}**", DiscordColor.Green);
+            await ctx.RespondAsync(embed.builder.Build());
+            return;
+
+
         }
 
         [Command("quit")]
@@ -44,14 +66,19 @@ namespace Vaulty.Modules
             // Retrieve user
             User u = new User() { Id = ctx.User.Id.ToString() };
             u.ReadUser();
+
             // Retrieve user executions
             CommandExecutions executions = new CommandExecutions() { Id = ctx.User.Id.ToString() };
             executions.GetExecution();
+
             // Retrieve user job
             Job j = new Job();
             j.GetJob(u.Job);
 
-            
+            //Retrieve experience 
+            WorkExperience wexp = new WorkExperience(u.Id);
+            wexp.GetWorkExperience();
+
             string dateTimeOffset = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
             ulong elapsed = ulong.Parse(dateTimeOffset) - ulong.Parse(executions.LastWork);
 
@@ -69,10 +96,17 @@ namespace Vaulty.Modules
             int reward = n.Next(j.SalaryMin, j.SalaryMax) ;
             u.VaultCoins += reward;
             executions.LastWork = dateTimeOffset;
+            wexp.WorkXp += j.WorkXp;
+            if(wexp.WorkXp >= wexp.XpUntilNextLevel)
+            {
+                wexp.WorkLevel++;
+                wexp.XpUntilNextLevel = WorkExperience.CalculateXpForNextLevel(wexp.WorkLevel);
+            }
 
             //Update db
             u.ModifyUser();
             executions.ModifyExecution();
+            wexp.UpdateWorkExperience();
 
             // Send answer
             embed = new ResponseEmbed(ctx, string.Format("Vous avez recu votre salaire de {0} {1} pour votre travail en tant que : **{2}**. Revenez dans 1 heure pour récupérer votre prochain salaire.", reward, Const.VAULTYCOINS_EMOJI, j.Label), col: DiscordColor.Green);
@@ -93,7 +127,8 @@ namespace Vaulty.Modules
             Job j = new Job();
             j.GetJob(u.Job);
 
-            await ctx.RespondAsync(j.Id.ToString());
+            embed = new ResponseEmbed(ctx, $"Vous exercez le metier : **{j.Label}**", DiscordColor.Green);
+            await ctx.RespondAsync(embed.builder.Build());
         }
     }
 

@@ -16,6 +16,10 @@ namespace Vaulty.Database.Models
         public int SalaryMax { get; set; }
         public int WorkXp {  get; set; }
 
+        public Job()
+        {
+            Id = -1;
+        }
 
         public void GetJob(int id)
         {
