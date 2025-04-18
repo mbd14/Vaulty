@@ -32,17 +32,17 @@ namespace Vaulty.Embeds
                     new Tuple<string, string, bool>
                     (
                         "Daily",
-                         dailyIsAvailable(c.LastWork) ?
-                         $"✅ Disponible depuis <t:{ulong.Parse(c.LastWork) + Const.SECONDS_IN_DAY}:R>" :
-                         $"❌ Disponible dans   <t:{(ulong.Parse(c.LastWork) + Const.SECONDS_IN_DAY)}:R>",
+                         dailyIsAvailable(c.LastDaily) ?
+                         $"✅ Disponible depuis <t:{ulong.Parse(c.LastDaily) + Const.SECONDS_IN_DAY}:R>" :
+                         $"❌ Disponible dans   <t:{(ulong.Parse(c.LastDaily) + Const.SECONDS_IN_DAY)}:R>",
                         false
                     ),
                     new Tuple<string, string, bool>
                     (
                         "Weekly",
-                         weeklyIsAvailable(c.LastWork) ?
-                         $"✅ Disponible depuis <t:{ulong.Parse(c.LastWork) + Const.SECONDS_IN_WEEK}:R>" :
-                         $"❌ Disponible dans   <t:{(ulong.Parse(c.LastWork) + Const.SECONDS_IN_WEEK)}:R>",
+                         weeklyIsAvailable(c.LastWeekly) ?
+                         $"✅ Disponible depuis <t:{ulong.Parse(c.LastWeekly) + Const.SECONDS_IN_WEEK}:R>" :
+                         $"❌ Disponible dans   <t:{(ulong.Parse(c.LastWeekly) + Const.SECONDS_IN_WEEK)}:R>",
                         false
                     ),
 

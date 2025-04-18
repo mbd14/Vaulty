@@ -22,10 +22,10 @@ namespace Vaulty.Modules
         /// <returns></returns>
         [Command("balance")]
         [TextAlias("bal", "coins")]
-        public async Task BalanceCommand(CommandContext ctx)
+        public async Task BalanceCommand(CommandContext ctx, DiscordUser d = null)
         {
             // Retrieve user that executed the command
-            User u = new User() { Id = ctx.User.Id.ToString()};
+            User u = d == null ? new User() { Id = ctx.User.Id.ToString()} : new User() { Id = d.Id.ToString() };
             u.ReadUser();
             
             // Construct embed to display user balance

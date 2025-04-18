@@ -25,13 +25,13 @@ namespace Vaulty.Database.Models
                 dbCon.con.Open();
                 string query = "SELECT * FROM JOBS WHERE Id=@Id";
                 SqlCommand command = new SqlCommand(query, dbCon.con);
-                command.Parameters.AddWithValue("@Id", Id);
+                command.Parameters.AddWithValue("@Id", id);
 
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    Id = Id;
+                    Id = reader.GetInt32(reader.GetOrdinal("Id"));
                     Label = reader.GetString(reader.GetOrdinal("Label"));
                     Tier = reader.GetInt32(reader.GetOrdinal("Tier"));
                     SalaryMin = reader.GetInt32(reader.GetOrdinal("SalaryMin"));

@@ -37,7 +37,7 @@ namespace Vaulty.Database.Models
 
                 if (reader.Read())
                 {
-                    Id = Id;
+                    Id = reader.GetString(reader.GetOrdinal("UserId"));
                     LastDaily = reader.GetString(reader.GetOrdinal("LastExecDaily"));
                     LastWeekly = reader.GetString(reader.GetOrdinal("LastExecWeekly"));
                     LastWork = reader.GetString(reader.GetOrdinal("LastExecWork"));

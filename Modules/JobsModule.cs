@@ -47,6 +47,9 @@ namespace Vaulty.Modules
             // Retrieve user executions
             CommandExecutions executions = new CommandExecutions() { Id = ctx.User.Id.ToString() };
             executions.GetExecution();
+            // Retrieve user job
+            Job j = new Job();
+            j.GetJob(u.Job);
 
             
             string dateTimeOffset = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
@@ -63,7 +66,7 @@ namespace Vaulty.Modules
 
             // Change data models in controler
             Random n = new Random(int.Parse(dateTimeOffset));
-            int reward = n.Next(Const.WORK_REWARD_MIN, Const.WORK_REWARD_MAX) ;
+            int reward = n.Next(j.SalaryMin, j.SalaryMax) ;
             u.VaultCoins += reward;
             executions.LastWork = dateTimeOffset;
 
@@ -72,9 +75,25 @@ namespace Vaulty.Modules
             executions.ModifyExecution();
 
             // Send answer
-            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu votre salaire de {0} {1}. Revenez dans 1 heure pour récupérer votre prochain salaire.", reward, Const.VAULTYCOINS_EMOJI), col: DiscordColor.Green);
+            embed = new ResponseEmbed(ctx, string.Format("Vous avez recu votre salaire de {0} {1} pour votre travail en tant que : **{2}**. Revenez dans 1 heure pour récupérer votre prochain salaire.", reward, Const.VAULTYCOINS_EMOJI, j.Label), col: DiscordColor.Green);
             await ctx.RespondAsync(embed.builder.Build());
 
+        }
+
+        [Command("info")]
+        public async Task InfoJob(CommandContext ctx)
+        {
+            ResponseEmbed embed;
+
+            // Retrieve user
+            User u = new User() { Id = ctx.User.Id.ToString() };
+            u.ReadUser();
+
+            // Retrieve user job
+            Job j = new Job();
+            j.GetJob(u.Job);
+
+            await ctx.RespondAsync(j.Id.ToString());
         }
     }
 
