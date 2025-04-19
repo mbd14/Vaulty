@@ -22,7 +22,7 @@ namespace Vaulty.Embeds
             BuildBasicEmbed
             (
                 ctx: ctx,
-                title: "Récapitulatif",
+                title: $"Récapitulatif de {App.Vaulty._client.GetUserAsync(ulong.Parse(u.Id)).Result.Username}",
                 fields: new List<Tuple<string, string, bool>>
                 {
                 new Tuple<string, string, bool>

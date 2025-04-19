@@ -22,10 +22,10 @@ namespace Vaulty.Modules
         /// <returns></returns>
         [Command("balance")]
         [TextAlias("bal", "coins")]
-        public async Task BalanceCommand(CommandContext ctx)
+        public async Task BalanceCommand(CommandContext ctx, DiscordUser d = null)
         {
             // Retrieve user that executed the command
-            User u = new User() { Id = ctx.User.Id.ToString()};
+            User u = d == null ? new User() { Id = ctx.User.Id.ToString()} : new User() { Id = d.Id.ToString() };
             u.ReadUser();
             
             // Construct embed to display user balance
@@ -175,7 +175,6 @@ namespace Vaulty.Modules
         }
         #endregion
 
-
         #region Command : Richest
         [Command("richest")]
         public async Task RichestCommand(CommandContext ctx)
@@ -190,41 +189,6 @@ namespace Vaulty.Modules
         }
         #endregion
 
-        [Command("give")]
-        public async Task GiveCommand(CommandContext ctx, DiscordUser usr, int amount)
-        {
-            ResponseEmbed reponse;
-            if (!ctx.Member.Permissions.HasPermission(DiscordPermission.Administrator))
-            {
-                reponse = new ResponseEmbed
-                    (
-                    ctx,
-                    string.Format("Vous ne pouvez pas faire ca",
-                    usr.Mention, amount, Const.VAULTYCOINS_EMOJI),
-                    DiscordColor.Red
-                    );
-                await ctx.RespondAsync("", reponse.builder.Build());
-                return;
-            }
-            
-            string[] args = [usr.Id.ToString(), amount.ToString()];
-            if (!ArgumentValidator.PayCheck(ctx, args)) return;
 
-            User payed_u = new User() { Id = usr.Id.ToString() };
-
-            payed_u.ReadUser();
-            payed_u.VaultCoins += amount;
-            payed_u.ModifyUser();
-
-            reponse = new ResponseEmbed
-                (
-                ctx,
-                string.Format("Vous avez payé {0} {1} {2}",
-                usr.Mention, amount, Const.VAULTYCOINS_EMOJI),
-                DiscordColor.Green
-                );
-
-            await ctx.RespondAsync("", reponse.builder.Build());
-        }
     }
 }

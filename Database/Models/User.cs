@@ -19,6 +19,7 @@ namespace Vaulty.Database.Models
         public int Bank { get; set; }
         public int Vaultium {  get; set; }
         public bool HasBank { get; set; }
+        public int Job { get; set; }
         public User() { }
 
         /// <summary>
@@ -29,13 +30,14 @@ namespace Vaulty.Database.Models
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank)";
+                string query = "INSERT INTO [USER](Id, VaultCoins, Vaultium, Bank_Amount, Has_Bank, Job) VALUES(@Id, @VaultCoins, @Vaultium, @Bank_Amount, @Has_Bank, @Job)";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
                 command.Parameters.AddWithValue("@VaultCoins", VaultCoins);
                 command.Parameters.AddWithValue("@Vaultium", Vaultium);
                 command.Parameters.AddWithValue("@Bank_Amount", Bank);
                 command.Parameters.AddWithValue("@Has_Bank", HasBank);
+                command.Parameters.AddWithValue("@Job", Job);
 
                 dbcon.con.Open();
                 int result = command.ExecuteNonQuery();
@@ -70,6 +72,7 @@ namespace Vaulty.Database.Models
                     Vaultium = reader.GetInt32(reader.GetOrdinal("Vaultium"));
                     Bank = reader.GetInt32(reader.GetOrdinal("Bank_Amount"));
                     HasBank = reader.GetBoolean(reader.GetOrdinal("Has_Bank"));
+                    Job = reader.GetInt32(reader.GetOrdinal("Job"));
                 }
                 else
                 {
@@ -90,12 +93,13 @@ namespace Vaulty.Database.Models
             DbCon dbcon = new DbCon();
             using (dbcon)
             {
-                string query = "UPDATE [USER] SET VaultCoins = @VaultCoins, Vaultium=@Vaultium, Bank_Amount = @Bank_Amount WHERE Id = @Id";
+                string query = "UPDATE [USER] SET VaultCoins = @VaultCoins, Vaultium=@Vaultium, Bank_Amount = @Bank_Amount, Job = @Job WHERE Id = @Id";
                 SqlCommand command = new SqlCommand(query, dbcon.con);
                 command.Parameters.AddWithValue("@Id", Id);
                 command.Parameters.AddWithValue("@Bank_Amount", Bank);
                 command.Parameters.AddWithValue("@VaultCoins", VaultCoins);
                 command.Parameters.AddWithValue("@Vaultium", Vaultium);
+                command.Parameters.AddWithValue("@Job", Job);
                 dbcon.con.Open();
                 command.ExecuteNonQuery();
                 dbcon.con.Close();
@@ -123,7 +127,8 @@ namespace Vaulty.Database.Models
                         VaultCoins = reader.GetInt32(reader.GetOrdinal("VaultCoins")),
                         Vaultium = reader.GetInt32(reader.GetOrdinal("Vaultium")),
                         Bank = reader.GetInt32(reader.GetOrdinal("Bank_Amount")),
-                        HasBank = reader.GetBoolean(reader.GetOrdinal("Has_Bank"))
+                        HasBank = reader.GetBoolean(reader.GetOrdinal("Has_Bank")),
+                        Job = reader.GetInt32(reader.GetOrdinal("Job")),
                     };
 
                     topUsers.Add(u);
