@@ -117,7 +117,7 @@ namespace Vaulty.Modules
         [Command("info")]
         public async Task InfoJob(CommandContext ctx)
         {
-            ResponseEmbed embed;
+            WorkExperienceEmbed embed;
 
             // Retrieve user
             User u = new User() { Id = ctx.User.Id.ToString() };
@@ -126,8 +126,10 @@ namespace Vaulty.Modules
             // Retrieve user job
             Job j = new Job();
             j.GetJob(u.Job);
+            WorkExperience w = new WorkExperience(u.Id);
+            w.GetWorkExperience();
 
-            embed = new ResponseEmbed(ctx, $"Vous exercez le metier : **{j.Label}**", DiscordColor.Green);
+            embed = new WorkExperienceEmbed(ctx, j.Label, w.WorkLevel, w.WorkXp, w.XpUntilNextLevel, j);
             await ctx.RespondAsync(embed.builder.Build());
         }
     }
