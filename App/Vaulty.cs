@@ -4,6 +4,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.TextCommands;
 using DSharpPlus.Commands.Processors.TextCommands.Parsing;
 using Microsoft.Extensions.Logging;
+using Vaulty.Database.Models;
 using Vaulty.Modules;
 using Vaulty.Utils;
 using static Vaulty.Modules.UserModule;
@@ -59,6 +60,18 @@ namespace Vaulty.App
                 // The default value is true, however it's shown here for clarity
                 RegisterDefaultCommandProcessors = true
             });
+
+            _builder.ConfigureEventHandlers
+                (
+                    b => b.HandleMessageCreated(async (s, e) =>
+                    {
+                        User payed_u = new User() { Id = e.Author.Id.ToString() };
+
+                        payed_u.ReadUser();
+                        payed_u.VaultCoins += 1;
+                        payed_u.ModifyUser();
+                    })
+                );
 
             // Build client
             _client = _builder.Build();
